@@ -1,0 +1,22 @@
+{
+  "name": "zero-nine",
+  "version": "0.0.1",
+  "description": "zero package",
+  "zero": {
+    "dependencies": {
+      "file": "^0.0.1",
+      "bus": "^0.0.1",
+      "request": "^0.0.1",
+      "relation": "^0.0.1",
+      "node": "^0.0.1",
+      "model": "^0.0.1",
+      "rest": "^0.0.1",
+      "theme": "^0.0.1",
+      "configure": "^0.0.1",
+      "rbac": "^0.0.1",
+      "user": "^0.0.1",
+      "statistic": "^0.0.1"
+    }
+  },
+  "author": "jiamiu"
+}

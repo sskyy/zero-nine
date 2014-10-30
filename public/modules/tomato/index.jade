@@ -1,0 +1,50 @@
+
+div(ng-controller="tomato")
+    div(ng-init="newTodo={};queryTodos();queryUsers()")
+        .row
+            .col-sm-6
+                input.form-control(type="text",ng-model="newTodo.content")
+            .col-sm-3
+                select(ng-model="newTodo.commander" ng-options="member.name for member in  members")
+            .col-sm-3
+                a.btn(ng-click="create(newTodo,group)") add
+        //.row(ng-repeat="todo in crud.data.records track by todo.id" ng-include="'todo.tpl.html'")
+        div
+            .row(ng-repeat="todo in todos" ng-include="'todo.tpl.html'")
+
+
+    script(type="text/ng-template",id="todo.tpl.html")
+        .todo
+            div.content
+                div
+                    i.fa.fa-square-o(ng-show="!todo.completed",ng-click="todo.completed=true;crud.update(todo,true)")
+                    i.fa.fa-check-square-o(ng-show="todo.completed")
+                    span {{todo.content}}
+                    span(ng-show="todo.$$clock.status=='started'||todo.$$clock.status=='paused'")
+                        i.fa.fa-clock-o
+                        span {{todo.$$clock.time|duration:"mm:ss"}}
+                    a.btn.btn-primary(ng-click="todo.$$addingChild=true")
+                        i.fa.fa-plus
+                    a.btn.btn-primary(ng-show="todo.$$clock.status!='started'&&todo.$$clock.status!='paused'",ng-click="startClock(todo)")
+                        i.fa.fa-play
+                    a.btn.btn-primary(ng-show="todo.$$clock.status=='started'",ng-click="todo.$$clock.pause()")
+                        i.fa.fa-pause
+                    a.btn.btn-primary(ng-show="todo.$$clock.status=='paused'",ng-click="todo.$$clock.resume()")
+                        i.fa.fa-play
+                    a.btn.btn-primary(ng-show="todo.$$clock.status=='started'||todo.$$clock.status=='paused'",ng-click="todo.$$clock.stop()")
+                        i.fa.fa-stop
+
+                .progress(ng-if="todo.$$clock.status=='started'||todo.$$clock.status=='paused'")
+                    .progress-bar.progress-bar-info(style="width:{{(todo.$$clock.time/todo.$$clock.total)*100}}%")
+            div.addChild(ng-show="todo.$$addingChild",ng-init="newTodo={parentId:todo.id}")
+                form
+                    .form-group
+                        .col-sm-3
+                            input.form-control(ng-model='newTodo.content')
+                        .col-sm-3
+                            a.btn.btn-primary(ng-click="crud.create(newTodo,true)")
+                                i.fa.fa-check
+                            a.btn.btn-primary(ng-click="todo.$$addingChild=false")
+                                i.fa.fa-times
+            div.children
+                div(ng-repeat="todo in todo.children",ng-include="'todo.tpl.html'")

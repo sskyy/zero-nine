@@ -1,0 +1,13 @@
+div(ng-controller="group")
+   div(ng-controller="node.crud",crud-config='{"type":"group"}',ng-init="newGroup={};crud.query()", crud-params='{"limit":256}')
+      .row
+         .col-sm-6
+            input.form-control(type="text",ng-model="newGroup.name")
+         .col-sm-6
+            a.btn(ng-click="crud.create(newGroup,true)") add
+      .row(ng-repeat="group in crud.data.records track by group.id")
+         .col-sm-6 {{group.name}}
+         .col-sm-6
+            a.btn.btn-primary(ng-show="!inGroup(group, user)")
+               i.fa.fa-plus(ng-click="join(group,user)")
+            span(ng-show="inGroup(group,user)") 已加入

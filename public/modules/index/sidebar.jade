@@ -1,0 +1,36 @@
+aside.left-side.sidebar-offcanvas
+    // sidebar: style can be found in sidebar.less
+    section.sidebar
+        // Sidebar user panel
+        .user-panel
+            .pull-left.image
+                img.img-circle(src='../../images/avatar3.png', alt='User Image')
+            .pull-left.info
+                p Hello, Jane
+                a(href='#')
+                    i.fa.fa-circle.text-success
+                    |  Online
+        // sidebar menu: : style can be found in sidebar.less
+        ul.sidebar-menu
+            li.treeview.active
+                a(ui-sref="tomato({userId:user.id})")
+                    i.fa.fa-picture-o
+                    span 我的任务
+                    i.fa.fa-angle-left.pull-right
+                ul.treeview-menu(style="display:block")
+                    li
+                        a(ui-sref="tomato({userId:user.id,commanderId:null,groupId:null})") 我创建的
+                        a(ui-sref="tomato({commanderId:user.id,userId:null,groupId:null})") 分配给我
+            li.treeview
+                a
+                    i.fa.fa-group
+                    span 团队任务
+                    i.fa.fa-angle-left.pull-right
+                ul.treeview-menu(style="display:block")
+                    li(ng-repeat="group in user.groups")
+                        a(ui-sref="tomato({groupId:group.id,userId:null,commanderId:null})") {{group.name}}
+            li.treeview
+                a(ui-sref="group")
+                    i.fa.fa-group
+                    span 团队列表
+                    i.fa.fa-angle-left.pull-right

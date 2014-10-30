@@ -1,0 +1,5 @@
+{
+  "exec" : "gulp",
+  "watch" : ["tasks"],
+  "verbose" : true
+}

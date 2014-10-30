@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AngularJS UI Tree demo</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../lib/angular-ui-tree.min.css">
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body ng-app="treeApp" ng-controller="treeCtrl">
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>
+                <input type="search" ng-model="keyword" ng-change="search(keyword, data)">
+                <a href="" class="btn btn-default pull-right" ng-click="collapseAll()">Collapse all</a>
+                <a href="" class="btn btn-default pull-right" ng-click="expandAll()">Expand all</a>
+            </h3>
+
+            <!-- Nested node template -->
+            <script type="text/ng-template" id="nodes_renderer.html">
+                <div ui-tree-handle class="tree-node tree-node-content">
+                    <input type="checkbox" ng-checked="node.checked" ng-click="check( node )">
+                    <a nodrag class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0"  ng-click="toggleExpand(node,this)">
+                        <!--<span class="glyphicon" ng-class="{'glyphicon-chevron-right': !node.expanded, 'glyphicon-chevron-down': node.expanded}"></span>-->
+                        +
+                    </a>
+                    <!--<a class="btn btn-primary" nodrag ng-click="toggle2(node)">{{node.expanded?"collapse":"expand"}}</a>-->
+                    {{node.title}}
+                </div>
+                <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden:!node.expanded}" >
+                    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+                    </li>
+                </ol>
+            </script>
+            <div ui-tree id="tree-root">
+                <ol ui-tree-nodes ng-model="data">
+                    <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                </ol>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <h3>Data binding</h3>
+            <div class="info">
+                {{info}}
+            </div>
+            <pre class="code">{{ data | json }}</pre>
+        </div>
+    </div>
+
+</div>
+
+<!--[if IE 8]>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.min.js"></script>
+<![endif]-->
+<script src="../../lib/angular-1.2.23.min.js"></script>
+<script src="../../lib/lodash.compat.min.js"></script>
+<script type="text/javascript" src="../../lib/angular-ui-tree.js"></script>
+<script type="text/javascript" src="tree.js"></script>
+</body>
+</html>
