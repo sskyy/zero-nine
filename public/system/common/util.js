@@ -32,7 +32,7 @@ angular.module('util',['ngResource'])
       return scope.$eval(str)
     }
 
-    return {
+    var util = {
       parseQuery : function( queryStr ){
         return _.reduce(queryStr.split("&"),function(a, b){
           b = b.split("=")
@@ -53,7 +53,79 @@ angular.module('util',['ngResource'])
         }
         return injected
       },
-      parseJSON : parseJSON
+      parseJSON : parseJSON,
+      replace : function( target, source ){
+        if(_.isArray(target)){
+          target.splice(0)
+          util.append( target, source)
+        }else{
+          for( var i in target ){
+            if( target.hasOwnProperty(i) && !_.isFunction(target[i])) delete target[i]
+          }
+          for( var j in source){
+            if( source.hasOwnProperty(j) && !_.isFunction(source[j])) target[j] = source[j]
+          }
+        }
+
+      },
+      append : function append( arr1, arr2 ){
+        arr2.forEach(function(i){
+          arr1.push(i)
+        })
+      },
+      walk : function( obj, childName, cb ){
+        if( obj ){
+          cb( obj )
+        }
+
+        if( obj[childName] ){
+          _.forEach( obj[childName],function(v,k){
+            util.walk(v,childName,cb)
+          })
+        }
+      }
+    }
+
+    return util
+  })
+  .service('crudSetup', function(util){
+    return function( $attrs, $scope ){
+      var parsedConfig = util.parseJSON($attrs['crudConfig'],$scope)
+
+      if( !parsedConfig.type ){
+        return console.log("You must use attr `crud-config={type:node_type}` to specify which type of node you want to operate.")
+      }
+
+      var config = _.defaults( parsedConfig,{
+        range:3,
+        url : "/"+parsedConfig.type,
+        advancedPage : true
+      })
+
+      var params = _.defaults( $attrs['crudParams']?util.parseJSON($attrs['crudParams'],$scope):{},{
+        limit: 10,
+        skip : 0,
+        sort : "id DESC"
+      })
+
+      var preload = util.inject("preload","preload")
+      var records = false
+
+      if( preload && preload.data( config.type )){
+        //if there preload data
+        params = _.extend( params, preload.query() )
+        records = preload.data(config.type)
+
+      }else{
+        //read configuration from search and attributes
+        var crudSearchOptions = $attrs['crudSearchParams']?util.parseJSON($attrs['crudSearchParams'],$scope): []
+        var search = _.pick( util.parseQuery(window.location.href.split("?").pop() ), crudSearchOptions)
+
+        console.log( crudSearchOptions, search )
+
+        params = _.extend(params, _.pick(search , crudSearchOptions))
+      }
+      return [config, params, records]
     }
   })
   .factory('crud',function( $resource,$http,pagination,util ){
@@ -94,7 +166,7 @@ angular.module('util',['ngResource'])
       })
 
       var crud = _.defaults( config, {
-        Resource :  $resource( config.url+'/:id', params,{"remove":{isArray:true,method:"DELETE"}}),
+        Resource :  $resource( config.url+'/:id', {},{"remove":{isArray:true,method:"DELETE"}}),
         pagination : {
           index:null,
           count:null,
@@ -108,9 +180,16 @@ angular.module('util',['ngResource'])
           records : []
         },
         params : params,
-        query : function( params, useCache ){
-          params = params || {}
+        query : function( params,useCache, cb ){
+          var args = _.toArray(arguments)
+          cb = args.pop()
+          if(!_.isFunction(cb)){
+            args.push(cb)
+          }
+          params = args.shift() || {}
           _.extend( crud, params )
+
+          useCache = args.shift()
 
           //first time
           if( crud.data.count === null){
@@ -125,14 +204,21 @@ angular.module('util',['ngResource'])
             if( !(params.skip < crud.data.cacheIndex ) && !(params.skip + params.limit > crud.data.cacheIndex + crud.data.cache.length ) ){
               crud.updateData()
               crud.updatePagination()
+              config.callback && config.callback.call(crud,crud.data.records)
+              cb && cb(crud.data.records)
+
             }
           }else{
-            crud.Resource.query(params).$promise.then(function(data){
+            crud.Resource.query(_.defaults(params,crud.params)).$promise.then(function(data){
               if( data.length < crud.params.limit && crud.data.unCountable ){
                 crud.data.unCountable = false
               }
               crud.updateData(data)
               crud.updatePagination()
+              config.callback && config.callback.call(crud,crud.data.records)
+              cb&&cb(crud.data.records)
+
+
             })
           }
 
@@ -156,6 +242,9 @@ angular.module('util',['ngResource'])
           return promise
         },
         remove : function( r, refresh){
+          if( !r.id ){
+            return console.log("must specify id when remove")
+          }
           var promise = crud.Resource.remove({id:r.id}).$promise
           if( refresh ){
             crud.query()

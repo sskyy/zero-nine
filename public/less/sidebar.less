@@ -5,7 +5,7 @@
 
 .sidebar {
     margin-bottom: 5px;
-    // remove shadow from form 
+    // remove shadow from form
     .sidebar-form {
         input:focus {
             -webkit-box-shadow: none;
@@ -19,37 +19,48 @@
         list-style: none;
         margin: 0;
         padding: 0;
+        font-size:12px;
         > li {
             margin: 0;
             padding: 0;
             > a {
                 padding: 12px 5px 12px 15px;
                 display: block;
-                > .fa, > .glyphicon, > .ion {
-                    width: 20px;
-                }
+                color:#eee;
             }
         }
 
-        // Tree view menu 
-        .treeview-menu {
-            display: none;
-            list-style: none;
-            padding:0;
-            margin:0;
-            > li {
-                margin: 0;
-                > a {
-                    padding: 5px 5px 5px 15px;
-                    display: block;
-                    font-size: 14px;
-                    margin: 0px 0px;
-                    > .fa, > .glyphicon, > .ion {
-                        width: 20px;
+        .treeview{
+            margin:10px;
+            border-radius: 4px;
+
+            &:hover{
+                background: #35404d;
+            }
+            // Tree view menu
+            .treeview-menu {
+                list-style: none;
+                padding:0;
+                margin:0;
+                > li {
+                    margin: 0;
+                    > a {
+                        color:#ccc;
+                        padding: 5px 5px 5px 15px;
+                        display: block;
+                        margin-left: 20px;
+                        &:hover{
+                            color:#fff;
+                            -webkit-transition: all 0.3s ease;
+                        }
+                        &.active{
+                            color:#fff;
+                        }
                     }
                 }
             }
         }
+
     }
 }
 

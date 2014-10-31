@@ -1,11 +1,11 @@
 angular.module('group',['countdown','todo','node.crud'])
   .config(function ($stateProvider) {
     $stateProvider
-      .state('group', {
-        url : "/group",
+      .state('groups', {
+        url : "/groups",
         templateUrl: '/nine/modules/group/index'
       })
-  }).controller("group",function($scope,$http){
+  }).controller("groups",function($scope,$http){
 
     $scope.join = function( group, user ){
       if( !group ||!user){
