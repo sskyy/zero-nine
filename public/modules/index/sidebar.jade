@@ -4,7 +4,8 @@ aside.left-side.sidebar-offcanvas
         // Sidebar user panel
         .user-panel
             .pull-left.info
-                p Hello, {{user.name}}
+                i.fa.fa-angellist.item-m5
+                span.item-m5 {{user.name}}
                 a(href='/user/logout') 退出
 
         // sidebar menu: : style can be found in sidebar.less
@@ -15,7 +16,6 @@ aside.left-side.sidebar-offcanvas
                     span 我的任务
                 ul.treeview-menu
                     li(ui-sref-active="active")
-                        //a(ui-srefx='commander' href="#/tomato/commander?commander.id={{user.id}}") 分配给我
                         a(ui-sref-active="active" ui-sref='commander({"commander.id":user.id})') 分配给我
                         a(ui-sref-active="active" ui-sref='creator({"creator.id":user.id})') 我创建的
             li.treeview

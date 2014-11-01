@@ -2,24 +2,10 @@ doctype html
 html(ng-app='index')
     head
         include head
-    body.skin-twentyone.fixed(ng-controller='index')
-        include header
+    body.fixed(ng-controller='index').no-header
+        //include header
         .wrapper.row-offcanvas.row-offcanvas-left
-            // Left side column. contains the logo and sidebar
             include sidebar.jade
-            // Right side column. Contains the navbar and content of the page
             aside.right-side
                 div
-                    // Main content
-                    section.content(ui-view)
-
-            // /.right-side
-        // ./wrapper
-        // jQuery 2.0.2
-        //script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
-        // Bootstrap
-        //script(src='../../js/bootstrap.min.js', type='text/javascript')
-        // AdminLTE App
-        //script(src='../../js/AdminLTE/app.js', type='text/javascript')
-        // AdminLTE for demo purposes
-        //script(src='../../js/AdminLTE/demo.js', type='text/javascript')
+                    section.p10(ui-view)

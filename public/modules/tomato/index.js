@@ -26,9 +26,11 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
       })
 
   })
-  .controller('tomato',function( $scope,countdown, $http,$stateParams,todo,util,session,crud){
+  .controller('tomato',function( $scope,countdown, $http,$stateParams,todo,util,session,crud,$state){
 
-    console.log( $stateParams)
+    if( !$stateParams['group.id'] && !$stateParams['creator.id'] && !$stateParams['commander.id']){
+      return $state.go('commander',{"commander.id":session.data('user').id})
+    }
     //setup crud
     var config ={
       type : 'todo',

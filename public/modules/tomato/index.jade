@@ -18,7 +18,7 @@ div.box(ng-controller="tomato")
         div
             .row(ng-repeat="todo in todos" ng-include="'todo.tpl.html'")
             script(type="text/ng-template",id="todo.tpl.html")
-                .todo
+                .todo(ng-class="{completed:todo.completed}")
                     div.body.clearfix
                         div
                             span.complete
@@ -32,23 +32,23 @@ div.box(ng-controller="tomato")
                                 span(ng-show="(todo.childrenTomatos&&todo.childrenTomatos!==0)")
                                     i.fa.fa-music
                                     |  {{todo.childrenTomatos}}
-                            .badge.label-success.clock(ng-show="todo.$$clock.status=='started'||todo.$$clock.status=='paused'")
+                            .badge.item-m5.bg-green.clock(ng-show="todo.$$clock.status=='started'||todo.$$clock.status=='paused'")
                                 span
-                                    i.fa.fa-clock-o(ng-show="todo.$$clock.status=='started'")
-                                    i.fa.fa-pause(ng-show="todo.$$clock.status=='paused'")
+                                    i.item-m5.fa.fa-clock-o(ng-show="todo.$$clock.status=='started'")
+                                    i.item-m5.fa.fa-pause(ng-show="todo.$$clock.status=='paused'")
                                     span {{todo.$$clock.time|duration:"mm:ss"}}
                             span(ng-show="group.id")
-                                .badge.label-success.user
-                                    i.fa.fa-user
+                                .badge.item-m5.bg-green.user
+                                    i.item-m5.fa.fa-user
                                     span {{todo.creator.name}}
-                                .badge.label-success.user
-                                    i.fa.fa-user
+                                .badge.item-m5.bg-green.user
+                                    i.item-m5.fa.fa-user
                                     span {{todo.commander.name}}
                             span(ng-show="!group.id")
-                                .badge.label-success.user(ng-show="todo.creator.id!==user.id")
+                                .badge.item-m5.label-success.user(ng-show="todo.creator.id!==user.id")
                                     i.fa.fa-user
                                     span {{todo.creator.name}}
-                                .badge.label-success.user(ng-show="todo.commander.id!==user.id")
+                                .badge.item-m5.label-success.user(ng-show="todo.commander.id!==user.id")
                                     i.fa.fa-user
                                     span {{todo.commander.name}}
 

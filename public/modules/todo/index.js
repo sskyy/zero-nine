@@ -15,7 +15,6 @@ angular.module("todo",['ngResource','util'])
           if( !tree[v.parentId] || !tree[v.parentId] ){
             v.isRoot = true
             return
-            //return console.log( "parent not in this tree", v)
           }
 
           tree[v.parentId].childrenTomatos =( tree[v.parentId].childrenTomatos || 0 )+ (v.tomatos||0)
@@ -24,11 +23,11 @@ angular.module("todo",['ngResource','util'])
           tree[v.parentId].children.push( v )
         })
 
-        _.forEach( tree, function(v,k){
-          if( !v.isRoot ) delete tree[k]
+        _.forEach( todos, function(v,k){
+          if( !v.isRoot ) delete todos[k]
         })
 
-        return tree
+        return todos
       }
     }
 

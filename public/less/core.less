@@ -56,6 +56,9 @@ body > .header {
     .left-side {
         top: 50px;
     }
+    .no-header .left-side{
+        top : 0px;
+    }
     /*Right side strech mode*/
     .right-side.strech {
         margin-left: 0;
@@ -102,12 +105,6 @@ body.fixed {
 }
 
 
-/* Content */
-.content {
-    padding: 20px 15px;
-    overflow: auto;
-}
-
 /* Utility */
 
 /* H1 - H6 font */
@@ -126,34 +123,17 @@ h6,
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-/* Page Header */
-.page-header {
-    margin: 10px 0 20px 0;
-    font-size: 22px;
-
-    > small {
-        color: #666;
-        display: block;
-        margin-top: 5px;
-    }
-}
 
 /* All images should be responsive */
 img {
     max-width: 100% !important;
 }
 
-.sort-highlight {
-    background: #f4f4f4;
-    border: 1px dashed #ddd;
-    margin-bottom: 10px;
-}
-
 /* 10px padding and margins */
-.pad {
+.p10{
     padding: 10px;
 }
-.margin {
+.m10 {
     margin: 10px;
 }
 
@@ -357,66 +337,26 @@ table.text-center {
     &, &.table td, &.table th {
         font-weight: 700;
     }
-    
-    
 }
 
 .border-radius-none {
     .border-radius(0)!important;
 }
 
-/* _fix for sparkline tooltip */
-.jqstooltip{
-    padding: 5px!important;
-    width:auto!important;
-    height:auto!important;
-}
 
-/*
-Gradient Background colors
-*/
-.bg-teal-gradient {
-    .gradient(@teal; @teal; lighten(@teal, 16%))!important;
-    color: #fff;
+.item-p5{
+    display: inline-block;
+    padding: 0 5px;
 }
-.bg-light-blue-gradient {
-    .gradient(@light-blue; @light-blue; lighten(@light-blue, 12%))!important;
-    color: #fff;
+.item-p10{
+    display: inline-block;
+    padding: 0 10px;
 }
-.bg-blue-gradient {
-    .gradient(@blue; @blue; lighten(@blue, 7%))!important;
-    color: #fff;
+.item-m5{
+    display: inline-block;
+    margin:0 5px
 }
-.bg-aqua-gradient {
-    .gradient(@aqua; @aqua; lighten(@aqua, 7%))!important;
-    color: #fff;
-}
-.bg-yellow-gradient {
-    .gradient(@yellow; @yellow; lighten(@yellow, 16%))!important;
-    color: #fff;
-}
-.bg-purple-gradient {
-    .gradient(@purple; @purple; lighten(@purple, 16%))!important;
-    color: #fff;
-}
-.bg-green-gradient {
-    .gradient(@green; @green; lighten(@green, 7%))!important;
-    color: #fff;
-}
-.bg-red-gradient {
-    .gradient(@red; @red; lighten(@red, 10%))!important;
-    color: #fff;
-}
-.bg-black-gradient {
-    .gradient(@black; @black; lighten(@black, 10%))!important;
-    color: #fff;
-}
-.bg-maroon-gradient {
-    .gradient(@maroon; @maroon; lighten(@maroon, 10%))!important;
-    color: #fff;
-}
-
-
-.connectedSortable {
-    min-height: 100px;
+.item-m10{
+    display: inline-block;
+    margin: 0 10px
 }

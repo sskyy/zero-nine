@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app="user.login")
     head
         meta(charset='UTF-8')
         title Twenty | Install
@@ -12,19 +12,21 @@ html
         script(src='/nine/system/common/util.js')
         script(src="/nine/system/user/login.js")
     body
-        .form-box.transparent.hide(ng-app="user.login")
-            .header
-                 img(src="/twenty/images/logo.svg")
-            form(ng-controller="register",redirect='/nine/modules/index/index')
-                .body
-                    .form-group
-                        input.form-control(type='text', name='name', placeholder='Full name',ng-model='user.name')
-                    .form-group
-                        input.form-control(type='text', name='email', placeholder='Email',ng-model='user.email')
-                    .form-group
-                        input.form-control(type='password', name='password', placeholder='Password',ng-model='user.password')
-                .footer.text-center
-                    button.btn.bg-aqua(type='submit',ng-click='register(user)') Install
+        .container
+            .row
+                .col-sm-6.col-sm-offset-3
+                    form.form-box.transparent.hide(ng-controller="register",redirect='/nine/modules/index/index#/tomato/commander')
+                        .header.text-center
+                            h1(style="color:white")  TODO
+                        .body
+                            .form-group
+                                input.form-control(type='text', name='name', placeholder='Full name',ng-model='user.name')
+                            .form-group
+                                input.form-control(type='text', name='email', placeholder='Email',ng-model='user.email')
+                            .form-group
+                                input.form-control(type='password', name='password', placeholder='Password',ng-model='user.password')
+                        .footer.text-center
+                            a.btn.bg-success(type='submit',ng-click='register(user)') Install
         script.
             $(function(){
                 $('.form-box').addClass('fadeIn animated').removeClass('hide')

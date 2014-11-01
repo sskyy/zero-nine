@@ -1,12 +1,12 @@
 .todo{
     margin: 0 10px 4px 10px;
-    line-height: 54px;
     padding-left: 0px;
     .body{
         border-left: 3px solid #41CAC0;
         background: #f9f9f9;
         padding: 0 30px;
         font-size:14px;
+        line-height: 54px;
         color:#666;
         position: relative;
         .complete{
@@ -44,5 +44,9 @@
     .children{
         padding-left: 30px;
         border-top:1px #fff dashed ;
+    }
+
+    &.completed .text{
+     text-decoration: line-through;
     }
 }
