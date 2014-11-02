@@ -20,7 +20,7 @@ angular.module("todo",['ngResource','util'])
           tree[v.parentId].childrenTomatos =( tree[v.parentId].childrenTomatos || 0 )+ (v.tomatos||0)
           tree[v.parentId].children = tree[v.parentId].children || []
           v.parent = tree[v.parentId]
-          tree[v.parentId].children.push( v )
+          tree[v.parentId].children.unshift( v )
         })
 
         _.forEach( todos, function(v,k){

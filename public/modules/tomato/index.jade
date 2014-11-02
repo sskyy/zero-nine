@@ -1,18 +1,22 @@
 div.box(ng-controller="tomato")
-    div.box-header
+    div.box-header(ng-init="status")
         .box-title TODO
+        .box-tools
+            a(ng-click="query({completed:false})") 未完成
+            a(ng-click="query({completed:true})") | 已完成
+            a(ng-click="query({completed:null})") | 全部
     div.box-body
-        form(ng-init="newTodo={};queryTodos();queryUsers()",role="form")
+        form(ng-init="newTodo={}",role="form")
             .row
                 .col-sm-7
                     .form-group
-                        input.form-control(type="text",ng-model="newTodo.content")
+                        input.form-control(type="text",ng-model="newTodo.content",ng-keyup="($event.keyCode==13)&&create(newTodo,group)")
                 .col-sm-3
                     .form-group
                         select.form-control(ng-model="newTodo.commander" ng-options="member.name for member in  members")
                 .col-sm-2
                     .form-group
-                        a.btn.btn-success(ng-click="create(newTodo,group)")
+                        a.btn.btn-success(ng-click="create(newTodo,group)",ng-disabled="newTodo.$$submiting")
                             i.fa.fa-arrow-down
             //.row(ng-repeat="todo in crud.data.records track by todo.id" ng-include="'todo.tpl.html'")
         div

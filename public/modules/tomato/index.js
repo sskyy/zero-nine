@@ -72,7 +72,10 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
     var params = _.defaults(_.transform($stateParams,function(r,v,k){ v&&(r[k]=v)}), {
       limit : 256,
       sort : "id DESC",
-      populate : 'creator,commander'
+      populate : 'creator,commander',
+      completed : {
+        "not" : true
+      }
     })
 
 
@@ -131,6 +134,10 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
       todoCrud.update({id:todo.id,"startedAt" : (new Date).getTime(),"timeTotal":todo.$$clock.total})
     }
 
+    $scope.query = function( params ){
+      todoCrud.query(params)
+    }
+
     $scope.resume = function( todo ){
       if( !$scope.userClock(todo.$$clock) ) return alert("please stop what you are doing before")
 
@@ -158,11 +165,17 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
       }
 
       todo.creator = session.data('user').id
-      todo.commander = ( todo.commander || session.data('user')).id
+      todo.commander = ( todo.commander && todo.commander.id) || session.data('user').id
+      todo.completed = false
       group && (todo.group = group.id)
 
-      console.log("creating todo", todo)
-      return todoCrud.create(todo,true)
+      todo.$$submiting = true
+      return todoCrud.create(todo,true).success(function(){
+        todo.content = ''
+        todo.$$submiting = false
+      }).finally(function(){
+        todo.$$submiting = false
+      })
     }
 
 

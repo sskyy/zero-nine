@@ -187,7 +187,7 @@ angular.module('util',['ngResource'])
             args.push(cb)
           }
           params = args.shift() || {}
-          _.extend( crud, params )
+          _.extend( crud.params, params )
 
           useCache = args.shift()
 
@@ -201,7 +201,7 @@ angular.module('util',['ngResource'])
           }
 
           if( useCache ){
-            if( !(params.skip < crud.data.cacheIndex ) && !(params.skip + params.limit > crud.data.cacheIndex + crud.data.cache.length ) ){
+            if( !(crud.params.skip < crud.data.cacheIndex ) && !(crud.params.skip + params.limit > crud.data.cacheIndex + crud.data.cache.length ) ){
               crud.updateData()
               crud.updatePagination()
               config.callback && config.callback.call(crud,crud.data.records)
