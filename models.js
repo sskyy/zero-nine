@@ -45,6 +45,11 @@ module.exports = [{
       }
     }
   },
-  attributes : {},
+  attributes : {
+    name : {
+      type : 'string',
+      unique : true
+    }
+  },
   rest : true
 }]

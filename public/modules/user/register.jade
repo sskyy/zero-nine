@@ -27,10 +27,13 @@ html(ng-app="user.login")
                                 .form-group
                                     input.form-control(type='password', name='password', placeholder='Password',ng-model='user.password')
                             .footer.text-center
-                                a.btn.btn-success(ng-click='register(user)') Register
+                                a.btn.btn-success(ng-click='register(user)') Sign up
                                 .register
                                     p lready has an account？
                                         a(style="margin:0 10px",href="/nine/modules/user/login") Sign in
+                                div.Prompt
+                                    .callout.callout-danger(ng-if="failedCode" ng-switch="failedCode")
+                                        p(ng-switch-when="400") 用户名或邮箱已存在。
 
         script.
             $(function(){
