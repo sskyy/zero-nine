@@ -2,7 +2,7 @@ doctype html
 html
     head
         meta(charset='UTF-8')
-        title Twenty | Login
+        title Todo | Login
         link(href='/nine/css/bootstrap.min.css', rel='stylesheet', type='text/css')
         link(href='/nine/css/AdminLTE.css', rel='stylesheet', type='text/css')
         link(href='/nine/css/animate.css', rel='stylesheet', type='text/css')
@@ -18,15 +18,18 @@ html
                 .col-sm-6.col-sm-offset-3
                     form.form-box.transparent.hide(ng-controller='login',redirect="/nine/modules/index/index#/tomato/commander")
                         .header.text-center
-                            h1(style="color:white")  TODO
+                            img.logo(src="/nine/images/logo.svg")
                         .body
-                            .form-group
-                                input.form-control(type='text', name='email', placeholder='Email',ng-model='user.email')
-                            .form-group
-                                input.form-control(type='password', name='password', placeholder='Password',ng-model='user.password',ng-keyup='$event.which==13&&login()')
+                            .login
+                                .form-group
+                                    input.form-control(type='text', name='email', placeholder='Email',ng-model='user.email')
+                                .form-group
+                                    input.form-control(type='password', name='password', placeholder='Password',ng-model='user.password',ng-keyup='$event.which==13&&login()')
                         .footer.text-center
-                            a.btn.btn-success(ng-click="login(user)") Sign in
-                            a(style="margin:0 10px",href="/nine/modules/user/register") register
+                                a.btn.btn-success(ng-click="login(user)") Sign in
+                                .register
+                                    p Not a member? 
+                                        a(style="margin:0 10px",href="/nine/modules/user/register")  Sign up now ~
                             div.Prompt
                                 .callout.callout-danger(ng-if="failedCode" ng-switch="failedCode")
                                     p(ng-switch-when="404") 用户名或密码错误。

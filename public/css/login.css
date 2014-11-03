@@ -10,24 +10,24 @@
 
 }
 html,body{
-	background-color: #323339;
+	background-color: #fff;
 }
 
 .form-group input{
 	 margin: 0 auto;
-	 background-color: #2E2F35;
-	 border: solid 1px #3A3B42;
-	 width: 300px;
+	 background-color: #fff;
+	 border: solid 1px #E5E5E5;
+	 width: 260px;
 	 height: 40px;
 	 border-radius: 5px !important;
-	 color: #fff!important;
+	 color: #666666!important;
 }
 .form-group input[type=text]{
-	 color: #fff;
+	 color: #666666;
 }
 .form-group input:focus {
 	
-	border-color: #5d6472 !important;
+	border-color: #CBCBCB !important;
 }
 .bg-aqua{
 	background-color: #40C27D!important;
@@ -39,19 +39,66 @@ html,body{
 	margin-top: -12px;
 }
 .callout.callout-danger {
-	background-color: #f3c658;
-	 width: 300px;
+	background-color: #f2f2f2;
+	 width: 260px;
 	 height: 60px;
 	 border-radius: 5px !important;
 	 color: #fff;
 	 margin: 0 auto;
      border-color:#fff;
      border-left:0px;
+     text-align: center;
+     padding-top: 18px;
+
 }
 .Prompt{
 	margin-top: 42px;
 }
 .callout.callout-danger.ng-scope p{
-	color: #2d2c29;
-	margin-top:5px;
+	color: #666666;
+
+}
+
+img.logo{
+    width: 50%;
+    padding-top: 200px;
+}
+.login{
+    margin-top: 50px;
+}
+.btn-success{
+    color: #fff;
+    background-color: #6BBEF6;
+    border-color:#6CB6E8;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open>.dropdown-toggle.btn-success{
+    color: #fff;
+    background-color: #4AA6E3;
+    border-color: #4AA6E3;
+}
+
+.btn{
+    display:inline-block;
+    font-weight:bold;
+    text-align:center;
+    vertical-align:middle;
+    cursor:pointer;
+    font-size:15px;
+    width: 260px;
+
+}
+.register{
+    padding-top: 10px;
+    padding-right: 40px;
+}
+p{
+    color: #999999;
+}
+a{
+    color: #6BBEF6;
+    text-decoration: none;
+}
+a:hover, a:focus{
+    color:#4AA6E3;
+    text-decoration: underline;
 }

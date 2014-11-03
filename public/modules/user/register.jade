@@ -17,17 +17,20 @@ html(ng-app="user.login")
                 .col-sm-6.col-sm-offset-3
                     form.form-box.transparent.hide(ng-controller="register",redirect='/nine/modules/index/index#/tomato/commander')
                         .header.text-center
-                            h1(style="color:white")  TODO
+                            img.logo(src="/nine/images/logo.svg")
                         .body
-                            .form-group
-                                input.form-control(type='text', name='name', placeholder='Full name',ng-model='user.name')
-                            .form-group
-                                input.form-control(type='text', name='email', placeholder='Email',ng-model='user.email')
-                            .form-group
-                                input.form-control(type='password', name='password', placeholder='Password',ng-model='user.password')
-                        .footer.text-center
-                            a.btn.btn-success(ng-click='register(user)') Register
-                            a(style="margin:0 10px",href="/nine/modules/user/login") Sign in
+                            .login
+                                .form-group
+                                    input.form-control(type='text', name='name', placeholder='Full name',ng-model='user.name')
+                                .form-group
+                                    input.form-control(type='text', name='email', placeholder='Email',ng-model='user.email')
+                                .form-group
+                                    input.form-control(type='password', name='password', placeholder='Password',ng-model='user.password')
+                            .footer.text-center
+                                a.btn.btn-success(ng-click='register(user)') Register
+                                .register
+                                    p already has an account？
+                                        a(style="margin:0 10px",href="/nine/modules/user/login") Sign in
 
         script.
             $(function(){
