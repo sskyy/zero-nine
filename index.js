@@ -22,15 +22,15 @@ var nineModule = {
   acl :{
     roles : {
       "loggedIn" : function(req){
-        return req.session.user.id
+        console.log("check is user logged in?", req.session.user )
+        return req.session.user.id !== undefined
       }
     },
     routes : {
       "GET /nine/modules/index/index" : [{
         role : 'loggedIn',
         redirect : '/nine/modules/user/login'
-      }],
-      "GET /color/install" : ['isInstaller']
+      }]
     }
   }
 }
