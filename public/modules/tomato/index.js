@@ -73,9 +73,7 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
       limit : 256,
       sort : "id DESC",
       populate : 'creator,commander',
-      completed : {
-        "not" : true
-      }
+      completed : false
     })
 
 

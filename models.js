@@ -34,6 +34,17 @@ module.exports = [{
   rest : true
 },{
   identity : 'group',
+  relations : {
+    users :{
+      model : "user",
+      auth : ['read'],
+      multiple : true,
+      reverse : {
+        name : "groups",
+        multiple : true
+      }
+    }
+  },
   attributes : {},
   rest : true
 }]

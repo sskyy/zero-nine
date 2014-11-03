@@ -79,7 +79,7 @@ div.box(ng-controller="tomato")
                             .row
                                 .col-sm-6
                                     .form-group
-                                        input.form-control(type="text",ng-model="newTodo.content")
+                                        input.form-control(type="text",ng-model="newTodo.content",ng-keyup="($event.keyCode==13)&&create(newTodo,group)")
                                 .col-sm-3
                                     .form-group
                                         select.form-control(ng-model="newTodo.commander" ng-options="member.name for member in  members")

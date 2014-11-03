@@ -16,7 +16,7 @@ angular.module('group',['countdown','todo','node.crud'])
         return console.log("already in")
       }
 
-      var newUserWithGroups = {groups: (user.groups||[]).concat(group) }
+      var newUserWithGroups = {groups: (user.groups||[]).concat(group.id) }
       $http.put("/user/"+user.id,newUserWithGroups).then(function( newUser ){
         _.extend(user, newUser)
       })
@@ -24,6 +24,6 @@ angular.module('group',['countdown','todo','node.crud'])
 
     $scope.inGroup = function( group, user){
       console.log(user,group.id, _.find( user.groups,{id:group.id}) )
-      return user.groups && _.find( user.groups,{id:group.id})
+      return user.groups && _.find(user.groups,{id:group.id })
     }
   })
