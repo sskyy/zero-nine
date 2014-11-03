@@ -10,7 +10,7 @@
 
 }
 html,body{
-	background-color: #fff;
+	background-color: #292929;
 }
 
 .form-group input{
@@ -65,6 +65,7 @@ img.logo{
 }
 .login{
     margin-top: 50px;
+
 }
 .btn-success{
     color: #fff;
@@ -89,6 +90,7 @@ img.logo{
 }
 .register{
     padding-top: 10px;
+    text-align: center;
     padding-right: 40px;
 }
 p{
