@@ -26,7 +26,9 @@ html(ng-app="user.login")
                             .form-group
                                 input.form-control(type='password', name='password', placeholder='Password',ng-model='user.password')
                         .footer.text-center
-                            a.btn.bg-success(type='submit',ng-click='register(user)') Install
+                            a.btn.btn-success(ng-click='register(user)') Register
+                            a(style="margin:0 10px",href="/nine/modules/user/login") Sign in
+
         script.
             $(function(){
                 $('.form-box').addClass('fadeIn animated').removeClass('hide')

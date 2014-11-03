@@ -25,7 +25,8 @@ html
                             .form-group
                                 input.form-control(type='password', name='password', placeholder='Password',ng-model='user.password',ng-keyup='$event.which==13&&login()')
                         .footer.text-center
-                            a.btn.btn-success(type='button',ng-click="login(user)") Sign in
+                            a.btn.btn-success(ng-click="login(user)") Sign in
+                            a(style="margin:0 10px",href="/nine/modules/user/register") register
                             div.Prompt
                                 .callout.callout-danger(ng-if="failedCode" ng-switch="failedCode")
                                     p(ng-switch-when="404") 用户名或密码错误。

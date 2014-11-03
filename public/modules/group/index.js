@@ -17,8 +17,8 @@ angular.module('group',['countdown','todo','node.crud'])
       }
 
       var newUserWithGroups = {groups: (user.groups||[]).concat(group.id) }
-      $http.put("/user/"+user.id,newUserWithGroups).then(function( newUser ){
-        _.extend(user, newUser)
+      $http.put("/user/"+user.id,newUserWithGroups).then(function( ){
+        user.groups.push( group )
       })
     }
 
