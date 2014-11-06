@@ -11,9 +11,9 @@ div.box(ng-controller="tomato")
                 .col-sm-7
                     .form-group
                         input.form-control(type="text",ng-model="newTodo.content",ng-keyup="($event.keyCode==13)&&create(newTodo,group)")
-                .col-sm-3
-                    .form-group
-                        select.form-control(ng-model="newTodo.commander" ng-options="member.name for member in  members")
+                .col-sm-3(ng-if="group")
+                    .form-group(ng-init="newTodo.commander=user.id")
+                        select.form-control(ng-model="newTodo.commander" ng-options="member.id as member.name for member in  group.users",placeholder="执行人")
                 .col-sm-2
                     .form-group
                         a.btn.btn-success(ng-click="create(newTodo,group)",ng-disabled="newTodo.$$submiting")

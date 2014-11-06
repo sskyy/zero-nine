@@ -1,6 +1,6 @@
 {
   "name": "zero-nine",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "zero package",
   "zero": {
     "dependencies": {
@@ -15,7 +15,8 @@
       "configure": "^0.0.1",
       "rbac": "^0.0.1",
       "user": "^0.0.1",
-      "statistic": "^0.0.1"
+      "statistic": "^0.0.1",
+      "security": "^0.0.1"
     }
   },
   "author": "jiamiu"

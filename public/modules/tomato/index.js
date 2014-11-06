@@ -85,7 +85,7 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
 
     //setup group
     if( params["group.id"] ){
-      $http.get("/group/"+params["group.id"]).success(function(group){
+      $http.get("/group/"+params["group.id"]+"?populate=users").success(function(group){
         $scope.group = group
       })
     }
@@ -163,7 +163,6 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
       }
 
       todo.creator = session.data('user').id
-      todo.commander = ( todo.commander && todo.commander.id) || session.data('user').id
       todo.completed = false
       group && (todo.group = group.id)
 
@@ -226,9 +225,7 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
       todoCrud.update(updateObj)
     }
 
-    //users
-    var userCrud = crud({type:'user'},{limit:null})
-    $scope.members = userCrud.query()
+
 
   })
   .directive('uiSrefx',function($state,$location){

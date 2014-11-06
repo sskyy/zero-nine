@@ -8,15 +8,22 @@ div.box(ng-controller="groups")
                .col-sm-6
                   .form-group
                      input.form-control(type="text",ng-model="newGroup.name")
-               .col-sm-6
+               .col-sm-3
+                  .form-group
+                     input.form-control(type="text",ng-model="newGroup.password",placeholder="密码")
+               .col-sm-3
                   .form-group
                      a.btn.btn-success(ng-click="crud.create(newGroup,true)")
                         i.fa.fa-plus
          .row(ng-repeat="group in crud.data.records track by group.id")
             .todo(ng-class="{completed:todo.completed}")
                div.body.clearfix
-                  div
-                     span.text {{group.name}}
-                     span(ng-show="inGroup(group,user)") | 已加入
-                     a.item-m5.btn.btn-success.btn-tiny(ng-click="join(group,user)",ng-show="!inGroup(group, user)")
-                        i.fa.fa-plus
+                  .row
+                     .col-sm-6
+                        span.text {{group.name}}
+                     .col-sm-3
+                        span(ng-show="inGroup(group,user)") | 已加入
+                        input(ng-show="!inGroup(group,user)",type="text",ng-model="group.password",class="form-control",style="display:inline-block",placeholder="输入密码")
+                     .col-sm-3(ng-show="group.password")
+                        a.item-m5.btn.btn-success.btn-tiny(ng-click="join(group,user)",ng-show="!inGroup(group, user)")
+                           i.fa.fa-plus

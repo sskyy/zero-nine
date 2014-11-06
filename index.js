@@ -4,6 +4,22 @@ var nineModule = {
     directory : "./public",
     index : "/nine/modules/index/index"
   },
+  listen : {
+    "group.update.before" : function( obj, newGroup){
+      var bus =this
+      if( newGroup.users ){
+        if( !newGroup.password ){
+          return bus.error(406,"use password to update group")
+        }else{
+          return bus.fire("group.findOne",{id:newGroup.id,password:newGroup.password}).then(function(res){
+            if( !res['model.findOne.group']){
+              return bus.error(406, "password of group not match")
+            }
+          })
+        }
+      }
+    }
+  },
   route : {
     "GET /test":function(req,res){
       nineModule.dep.model.models['todo'].find({}).then(function( r ){

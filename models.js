@@ -49,7 +49,14 @@ module.exports = [{
     name : {
       type : 'string',
       unique : true
+    },
+    password : {
+      type:'string',
+      required : true
     }
+  },
+  security : {
+    password: ['password']
   },
   rest : true
 }]

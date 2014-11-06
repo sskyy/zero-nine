@@ -349,8 +349,10 @@ angular.module('util',['ngResource'])
   .factory('session',function(){
     var session = {},
       registered = {}
+
     return {
       data : function( name, setObj ){
+        //write
         if( setObj ){
 
           if(_.isObject( session[name])){
@@ -371,6 +373,9 @@ angular.module('util',['ngResource'])
 
           return session[name]
         }else{
+          //get
+          var tmp = name.split("?"), query = tmp[1]
+          name = tmp[0]
 
           if( session[name] === undefined ){
             console.log("no handler registered for ",name,session)
@@ -379,7 +384,7 @@ angular.module('util',['ngResource'])
           //need construct
           if( session[name] === null ){
             session[name] = registered[name].origin
-            registered[name].handler( session[name] )
+            registered[name].handler( session[name], query )
             return (_.isObject(session[name]) || _.isArray(session[name])) ? session[name]: session
 
           }else{

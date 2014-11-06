@@ -16,9 +16,10 @@ angular.module('group',['countdown','todo','node.crud'])
         return console.log("already in")
       }
 
-      var newUserWithGroups = {groups: (user.groups||[]).concat(group.id) }
-      $http.put("/user/"+user.id,newUserWithGroups).then(function( ){
-        user.groups.push( group )
+      var newGroupsWithUsers = {users: (group.users||[]).concat(user.id),password:group.password }
+      $http.put("/group/"+group.id,newGroupsWithUsers).success(function( updatedGroup){
+        _.extend( group, updatedGroup )
+        user.groups.push( updatedGroup )
       })
     }
 
