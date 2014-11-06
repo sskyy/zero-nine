@@ -163,9 +163,11 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
       }
 
       todo.creator = session.data('user').id
+      todo.commander = todo.commander || session.data('user').id
       todo.completed = false
       group && (todo.group = group.id)
 
+      console.log( todo)
       todo.$$submiting = true
       return todoCrud.create(todo,true).success(function(){
         todo.content = ''
