@@ -157,7 +157,7 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
     }
 
     //methods
-    $scope.create = function( todo, group ){
+    $scope.create = function( todo, group, parent ){
       if( !session.data('user').id ){
         return alert("请先登陆")
       }
@@ -169,9 +169,17 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
 
       console.log( todo)
       todo.$$submiting = true
-      return todoCrud.create(todo,true).success(function(){
+      return todoCrud.create(todo,false).success(function( savedTodo){
         todo.content = ''
         todo.$$submiting = false
+
+        if( parent){
+          if( !parent.children ) parent.children = []
+          parent.children.push(savedTodo)
+        }else{
+          $scope.todos[savedTodo.id] = savedTodo
+        }
+
       }).finally(function(){
         todo.$$submiting = false
       })

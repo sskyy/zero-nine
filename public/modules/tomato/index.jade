@@ -79,13 +79,13 @@ div.box(ng-controller="tomato")
                             .row
                                 .col-sm-6
                                     .form-group
-                                        input.form-control(type="text",ng-model="newTodo.content",ng-keyup="($event.keyCode==13)&&create(newTodo,group)")
+                                        input.form-control(type="text",ng-model="newTodo.content",ng-keyup="($event.keyCode==13)&&create(newTodo,group, todo)")
                                 .col-sm-3
                                     .form-group
                                         select.form-control(ng-model="newTodo.commander" ng-options="member.name for member in  members")
                                 .col-sm-3
                                     .form-group
-                                        a.btn.btn-success(ng-click="create(newTodo,group)",style="margin-right:5px")
+                                        a.btn.btn-success(ng-click="create(newTodo,group, todo)",style="margin-right:5px")
                                             i.fa.fa-arrow-down
                                         a.btn.btn-success(ng-click="todo.$$addingChild=false")
                                             i.fa.fa-times
