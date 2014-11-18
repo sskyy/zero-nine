@@ -1,3 +1,5 @@
+var Promise = require('bluebird')
+
 var nineModule = {
   models : require('./models'),
   theme : {
@@ -40,13 +42,27 @@ var nineModule = {
       "loggedIn" : function(req){
         console.log("check is user logged in?", req.session.user )
         return req.session.user.id !== undefined
+      },
+      "hasGroupPassword" : function(req){
+        if( !req.param('password') ){
+          return false
+        }else{
+          return req.bus.fire('group.findOne',{password:req.param('password')}).then(function( findRes ){
+            if( !findRes['model.findOne.group'] ){
+              return Promise.reject('password not match')
+            }else{
+              delete req.params['password'] //resolved
+            }
+          })
+        }
       }
     },
     routes : {
       "GET /nine/modules/index/index" : [{
         role : 'loggedIn',
         redirect : '/nine/modules/user/login'
-      }]
+      }],
+      "PUT /group/*" : ['hasGroupPassword']
     }
   }
 }
