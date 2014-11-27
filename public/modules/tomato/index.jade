@@ -3,8 +3,8 @@ div.box(ng-controller="tomato")
         .box-title TODO
         .box-tools
             a(ng-click="query({completed:false})") 未完成
-            a(ng-click="query({completed:true})") | 已完成
-            a(ng-click="query({completed:null})") | 全部
+            a(ng-click="query({completed:true})") 已完成
+            a(ng-click="query({completed:null})") 全部
     div.box-body
         form(ng-init="newTodo={}",role="form")
             .row
