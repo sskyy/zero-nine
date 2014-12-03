@@ -1,6 +1,22 @@
 angular.module('countdown',['ui.router'])
 
 .service('countdown', function( $q, $timeout ){
+    var defaultClock = {
+      _startTime : null,
+        _ticked : 0,
+      _tick : _tick,
+      _resetTick : _resetTick,
+      _updateInterval : 1000,
+      time : 25 * 60 *1000,
+      total : 25 * 60 *1000,
+      status : '',
+      start : start,
+      stop : stop,
+      pause : pause,
+      resume : resume
+    }
+
+
     function start(){
       if( this.status == 'started' ){
         console.log("already started")
@@ -52,11 +68,7 @@ angular.module('countdown',['ui.router'])
     }
 
     function stop(){
-      this.status = "stopped"
-      this.time = 0
-      this._ticked = 0
-      this._startTime = null
-
+      _.extend(this, _.cloneDeep(defaultClock), _.cloneDeep(this._config))
     }
 
     function pause(){
@@ -69,20 +81,9 @@ angular.module('countdown',['ui.router'])
     }
 
     return function( config ){
-      return _.extend({
-        _startTime : null,
-        _ticked : 0,
-        _tick : _tick,
-        _resetTick : _resetTick,
-        _updateInterval : 1000,
-        time : 25 * 60 *1000,
-        total : 25 * 60 *1000,
-        status : '',
-        start : start,
-        stop : stop,
-        pause : pause,
-        resume : resume
-      },config)
+      var clock =  _.extend(_.cloneDeep(defaultClock),config)
+      clock._config = _.cloneDeep(config)
+      return clock
     }
   })
 .filter("duration", function(){

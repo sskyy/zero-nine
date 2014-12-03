@@ -98,8 +98,8 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
           if( _clock !== clock ){
             if( _clock && (_clock.status =='started' || _clock.status=='paused')) return false
             _clock = clock
-            return true
           }
+          return true
         }else{
           return _clock
         }
@@ -116,7 +116,9 @@ angular.module('tomato',['countdown','todo','node.crud','ngResource','util'])
       if( $scope.group ) return alert("you cannot start clock for anyone")
 
       //if it is user personal page, update global clock
-      if( !$scope.userClock(todo.$$clock) ) return alert("please stop what you are doing before")
+      if( !$scope.userClock(todo.$$clock) ){
+        return alert("please stop what you are doing before")
+      }
 
       todo.$$clock.start().then(function(){
         todoCrud.update({id:todo.id ,"tomatos" : (todo.tomatos||0) +1 })
