@@ -32,9 +32,9 @@ html
                                     a(style="margin:0 10px",href="/nine/modules/user/register")  Sign up now ~
                             div.Prompt
                                 .callout.callout-danger(ng-if="failedCode" ng-switch="failedCode")
-                                    p(ng-switch-when="404") 用户名或密码错误。
-                                    p(ng-switch-when="500") 服务器出错，请查看后台记录。
-                                    p(ng-switch-default) 未知错误，请查看后台记录。
+                                    p(ng-switch-when="404") Wrong login name or password.
+                                    p(ng-switch-when="500") Server error, check server logs.
+                                    p(ng-switch-default) Unknown error, check server logs.
 
 
         script.
